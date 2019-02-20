@@ -1,0 +1,12 @@
+plugins {
+  id 'groovy'
+  id 'maven'
+  id 'java'
+}
+
+dependencies {
+  implementation libs['jedis']
+  implementation libs['groovy']
+  implementation libs['zip4j']
+  implementation libs['common-lang']
+}

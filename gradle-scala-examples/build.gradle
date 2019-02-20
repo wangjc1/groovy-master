@@ -1,0 +1,73 @@
+//老版本使用apply plugin语法来下载插件
+plugins {
+    id 'idea'
+    id 'java'
+    id 'scala'
+}
+
+group 'com.wjc'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+//定制化工程目录
+sourceSets {
+    main {
+        scala
+                { srcDirs = ['src/main/scala', 'src/main/resources'] }
+        java
+                { srcDirs = ['src/main/java', 'src/main/resources'] }
+    }
+    test {
+        scala
+                { srcDirs = ['src/test/scala', 'src/test/resources'] }
+        java
+                { srcDirs = ['src/test/java', 'src/test/resources'] }
+    }
+}
+
+repositories {
+    maven {
+        url 'http://maven.aliyun.com/nexus/content/groups/public/'
+    }
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'org.scala-lang', name: 'scala-library', version: '2.10.4'
+    compile "org.scala-lang:scala-library:2.11.8"
+    compile group: 'org.apache.spark', name: 'spark-core_2.11', version: '2.3.3'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.wjc.scala.HelloWorld'
+    }
+}
+
+//初始化工程目录，使用命令： gradle createDirs
+task "createDirs" << {
+    sourceSets*.scala.srcDirs*.each { it.mkdirs() }
+    sourceSets*.java.srcDirs*.each { it.mkdirs() }
+    sourceSets*.resources.srcDirs*.each { it.mkdirs() }
+}
+
+//依赖编译，然后打包JAR
+task taskJar(type:Jar, dependsOn: [compileJava,compileScala]) {
+    from 'build/classes'
+    destinationDir = file('build/libs')
+}
+
+//清除上次的编译过的文件
+task clearPj(type:Delete){
+    delete 'build','target','out'
+}
+
+//把JAR复制到目标目录
+task release(type: Copy,dependsOn: [clearPj,taskJar]) {
+    from('build/libs') {
+        include '*.jar'
+    }
+    into('target')
+}

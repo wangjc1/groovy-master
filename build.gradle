@@ -1,0 +1,31 @@
+
+allprojects {
+	//清除编译路径
+	task myClean(type:Delete){
+		def rootPath = project.projectDir.absolutePath;
+
+		//用fileTree可以递归删除文件，却无法删除目录
+		def tree =  fileTree(rootPath).matching {
+			include (
+					'**/target/**',
+					'**/out/**',
+					//'**/build/**',
+					'**/*.iml',
+					'**/*.ipr',
+					'**/*.iws'
+			)
+		}
+		tree.each {
+			println it.getPath()
+		}
+		delete tree
+
+		//这个直接可以删除掉父工程和子工程中文件夹，再往下就无法递归了
+		delete 'target'
+		delete 'build'
+		delete 'out'
+		delete '.idea'
+
+	}
+}
+

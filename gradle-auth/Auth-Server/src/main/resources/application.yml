@@ -1,0 +1,16 @@
+db: cwgj
+server:
+  port: 8888
+  servlet:
+    context-path: /api/v1
+    session:
+      cookie:
+        name: BIUSID
+spring:
+  profiles:
+    active: dev
+    include: druid,mybatisplus,shiro
+logging:
+  path: ./logs
+  level:
+    com.wjc.dao: debug

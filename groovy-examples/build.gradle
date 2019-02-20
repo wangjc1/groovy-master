@@ -1,0 +1,17 @@
+plugins {
+  id 'groovy'
+}
+
+sourceSets {
+    main {
+        groovy { srcDirs = ['src'] }      
+    }
+}
+
+repositories {
+   mavenCentral()
+}
+
+dependencies {
+   compile 'org.codehaus.groovy:groovy-all:2.5.1'
+}

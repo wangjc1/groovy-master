@@ -1,0 +1,16 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'com.ts'
+description 'gradle-test-java项目用来测试构建可执行java应用，如：gradle run --args="hello"，还自带构建zip或tar包的命令。'
+
+sourceCompatibility = 1.8
+mainClassName = 'com.ts.app.App'
+
+dependencies {
+    compile 'com.isesol.ime.rent:rent-dubbo-api:1.0.1-SNAPSHOT'
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

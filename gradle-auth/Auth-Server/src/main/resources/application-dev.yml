@@ -1,0 +1,11 @@
+db: auth-dev
+spring:
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/${db}?characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: 123456

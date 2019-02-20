@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wjc.dao.sys.SysPermMapper">
+
+    <select id="getPermsByUserId" resultType="SysPerm">
+        SELECT
+            CONCAT('接口:',rp.perm_val) AS pname,
+            rp.perm_val AS pval
+        FROM
+            sys_role_perm rp
+        JOIN sys_user_role ur ON ur.role_id = rp.role_id
+        LEFT JOIN sys_perm p ON p.pval = rp.perm_val
+        WHERE ur.user_id = #{userId}
+    </select>
+
+    <select id="getPermsByRoleId" resultType="SysPerm">
+       SELECT
+         rp.perm_val AS pval,
+         rp.perm_type AS ptype,
+         IFNULL(p.leaf,IF(right(rp.perm_val,1)='*',true,false)) AS leaf
+        FROM
+        sys_role_perm rp
+        LEFT JOIN sys_perm p ON  p.pval = rp.perm_val
+        WHERE
+          rp.role_id = #{roleId}
+    </select>
+
+    <insert id="saveOrUpdate">
+        INSERT INTO sys_perm (pval,parent,pname,ptype,leaf,created) VALUES
+        <foreach collection="perms" item="p" separator=",">
+            (#{p.pval},#{p.parent},#{p.pname},#{p.ptype},#{p.leaf},#{p.created})
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        pname = VALUES(pname), parent = VALUES(parent), ptype = VALUES(ptype), leaf = VALUES(leaf), updated = now()
+    </insert>
+
+</mapper>
