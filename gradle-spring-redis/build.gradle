@@ -1,9 +1,9 @@
 //group 'com.github.kuangcp'
-//version '1.0-SNAPSHOT'
+version '1.0-SNAPSHOT'
 
 allprojects {
     apply plugin: 'java'
-    group 'com.github.kuangcp'
+    //group 'com.github.kuangcp'
     version = '1.0'
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
@@ -16,7 +16,7 @@ subprojects {
     }
     [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
     repositories {
-        mavenCentral()
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public'}
     }
     configurations {
         //compile.exclude module: 'commons-logging'

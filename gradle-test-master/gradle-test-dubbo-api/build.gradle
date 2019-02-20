@@ -26,13 +26,6 @@ jar {
 
 uploadArchives {
     repositories {
-        mavenDeployer {
-            repository(url: "http://maven.isesoldev.com/content/repositories/releases"){
-                authentication(userName: "jiawenjun", password: "a123456")
-            }
-            pom.version = "$project.version"
-            pom.artifactId = "gradle-test-dubbo-api"
-            pom.groupId = "$project.group"
-        }
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public'}
     }
 }

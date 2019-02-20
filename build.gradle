@@ -1,4 +1,10 @@
 
+plugins {
+    id 'idea'
+    id 'java'
+    id 'scala'
+}
+
 allprojects {
 	//清除编译路径
 	task myClean(type:Delete){
@@ -8,11 +14,11 @@ allprojects {
 		def tree =  fileTree(rootPath).matching {
 			include (
 					'**/target/**',
-					'**/out/**',
+					'**/out/**'
 					//'**/build/**',
-					'**/*.iml',
-					'**/*.ipr',
-					'**/*.iws'
+					//'**/*.iml',
+					//'**/*.ipr',
+					//'**/*.iws'
 			)
 		}
 		tree.each {
@@ -24,7 +30,7 @@ allprojects {
 		delete 'target'
 		delete 'build'
 		delete 'out'
-		delete '.idea'
+		//delete '.idea'
 
 	}
 }

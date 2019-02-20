@@ -3,9 +3,9 @@ buildscript {
 	ext {
 		springBootVersion = '1.5.16.RELEASE'
 	}
-	repositories {
-		mavenCentral()
-	}
+    repositories {
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public'}
+    }
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         //添加gradle-docker依赖，版本1.2
@@ -19,7 +19,7 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'docker'
 
 // This is used as the docker image prefix (org)
-group = 'com.wjc'
+//group = 'com.wjc'
 
 jar {
     baseName = 'gradle-docker'
@@ -49,7 +49,7 @@ task buildDocker(type: Docker) {
 
 
 repositories {
-	mavenCentral()
+    maven{ url 'http://maven.aliyun.com/nexus/content/groups/public'}
 }
 
 

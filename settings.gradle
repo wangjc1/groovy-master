@@ -1,4 +1,11 @@
 rootProject.name = 'gradle-examples-master'
-include (
-  'gradle-auth' 
+include(
+        'gradle-auth',
+        'gradle-docker',
+        'gradle-IM',
+        'gradle-java-multi',
+        'gradle-scala-examples',
+        //'gradle-spring-redis',
+        //'gradle-test-master',
+        'groovy-examples'
 )

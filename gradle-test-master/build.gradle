@@ -27,16 +27,7 @@ dependencies {
 
 allprojects {
     repositories {
-        jcenter()
-        mavenCentral()
-        maven {
-            name 'isesol'
-            url 'http://maven.isesoldev.com/content/groups/public/'
-        }
-        maven {
-            name 'local'
-            url 'file://F:\\m2\\repo'
-        }
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public'}
     }
 
     task("sayHello",{
