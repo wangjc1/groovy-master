@@ -5,7 +5,7 @@ include(
         'gradle-IM',
         'gradle-java-multi',
         'gradle-scala-examples',
-        //'gradle-spring-redis',
+        'gradle-spring-redis',
         //'gradle-test-master',
         'groovy-examples'
 )
