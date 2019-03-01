@@ -1,0 +1,45 @@
+
+buildscript {
+    repositories {
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public'}
+    }
+    dependencies {
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.8'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'com.google.protobuf'
+
+repositories {
+    maven{ url 'http://maven.aliyun.com/nexus/content/groups/public'}
+}
+
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:3.6.1'
+    }
+    plugins {
+        javalite {
+            artifact = 'com.google.protobuf:protoc-gen-javalite:3.0.0'
+        }
+    }
+    generateProtoTasks {
+        all()*.plugins {
+            javalite {}
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.google.protobuf:protobuf-java:3.6.1'
+    compile 'com.google.protobuf.nano:protobuf-javanano:3.1.0'
+    testCompile 'junit:junit:4.12'
+    testCompile 'commons-codec:commons-codec:1.10'
+
+}
+
+task clear(type: Delete) {
+    delete rootProject.buildDir
+}

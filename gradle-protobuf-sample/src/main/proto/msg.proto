@@ -1,0 +1,11 @@
+syntax = "proto3";
+package test;
+option java_package = "com.example.msg";
+option java_outer_classname = "MsgProto";
+
+message MsgBuf {
+   int32 ID = 1;
+   string Url = 2;
+}
+
+ 

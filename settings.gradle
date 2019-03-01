@@ -7,5 +7,6 @@ include(
         'gradle-scala-examples',
         'gradle-spring-redis',
         //'gradle-test-master',
-        'groovy-examples'
+        'groovy-examples',
+        'gradle-protobuf-sample'
 )
